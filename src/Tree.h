@@ -24,7 +24,7 @@ public:
 
 class Tree {
 public:
-  Tree(const int *frequencies);
+  Tree(const Vector<std::pair<char, int>> frequencies);
   Tree(TreeNode *root);
   ~Tree();
 

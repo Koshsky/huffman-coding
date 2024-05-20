@@ -1,15 +1,27 @@
 #include "Huffman.h"
-#include <iostream>
 
-int * createFrequencyTable(std::fstream &in)
+Vector<std::pair<char, int>> createFrequencyTable(std::fstream &in)
 {
-  int *frequencies = new int[ALPHABET_SIZE]();
+  Vector<std::pair<char, int>> frequencies;
 
   char c;
   while (in.peek() != EOF)
   {
     in.get(c);
-    frequencies[(size_t)c] += 1;
+    bool hasKey = false;
+    for (size_t i = 0; i < frequencies.size(); ++i)
+    {
+      if (frequencies[i].first == c)
+      {
+        ++frequencies[i].second;
+        hasKey = true;
+        break;
+      }
+    }
+    if (!hasKey)
+    {
+      frequencies.push_back({ c, 1 });
+    }
   }
 
   in.seekg(0, std::ios::beg);
@@ -30,12 +42,11 @@ void encode(std::fstream &inputFile, std::fstream &outputFile)
   inputFile.seekg(0, std::ios_base::beg);
   outputFile.seekp(0, std::ios::beg);
 
-  BitStream stream(outputFile);
-  std::unique_ptr<int[]> frequencies(createFrequencyTable(inputFile));
-  Tree tree(frequencies.get());
+  BitStream stream(outputFile, false);
+  Vector<std::pair<char, int>> frequencies(createFrequencyTable(inputFile));
+  Tree tree(frequencies);
   TreeNode *root = tree.root_;
   CodeTable codes(root);
-  //tree.printTree(std::cout);
   codes.printTable(std::cout);
 
   int length = root->freq_;
@@ -65,7 +76,7 @@ void decode(std::fstream &inputFile, std::fstream &outputFile)
   if (inputFile.peek() == EOF)
     return;
 
-  BitStream stream(inputFile);
+  BitStream stream(inputFile, false);
   int length;
   inputFile.read(reinterpret_cast<char *>(&length), sizeof(int));
 

@@ -12,9 +12,9 @@ class Vector
 {
 public:
   Vector();
-  Vector(Vector &&other) = delete;
+  Vector(Vector &&other);
   Vector &operator=(Vector &&other) = delete;
-  Vector(const Vector &other) = delete;
+  Vector(const Vector &other);
   Vector &operator=(const Vector &other) = delete;
   virtual ~Vector();
 
@@ -53,6 +53,27 @@ Vector<T>::Vector() :
   capacity_(INITIAL_CAPACITY),
   array_(new T[INITIAL_CAPACITY])
 {
+}
+
+template<typename T>
+inline Vector<T>::Vector(Vector &&other):
+  size_(0),
+  capacity_(0),
+  array_(nullptr)
+{
+  std::swap(size_, other.size_);
+  std::swap(capacity_, other.capacity_);
+  std::swap(array_, other.array_);
+}
+
+template<typename T>
+inline Vector<T>::Vector(const Vector &other):
+  size_(other.size_),
+  capacity_(capacity_),
+  array_(new T[other.capacity_])
+{
+  for (size_t i = 0; i < size_; ++i)
+    array_[i] = other.array_[i];
 }
 
 template <typename T>

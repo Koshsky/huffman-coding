@@ -50,18 +50,15 @@ void TreeNode::printTree(std::ostream &out) const
   out << ')';
 }
 
-Tree::Tree(const int *frequencies) :
+Tree::Tree(const Vector<std::pair<char, int>> frequencies) :
   root_(nullptr)
 {
 
   PriorityQueue<TreeNode *, TreeNodeComparator> queue;
-  for (std::size_t i = 0; i < ALPHABET_SIZE; i++)
+  for (std::size_t i = 0; i < frequencies.size(); i++)
   {
-    if (frequencies[i] != 0)
-    {
-      TreeNode *node = new TreeNode((char)i, frequencies[i], nullptr, nullptr);
-      queue.push(node);
-    }
+    TreeNode *node = new TreeNode(frequencies[i].first, frequencies[i].second, nullptr, nullptr);
+    queue.push(node);
   }
   if (queue.size() < 2)
   {

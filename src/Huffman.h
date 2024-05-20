@@ -4,8 +4,11 @@
 #include <fstream>
 #include <memory>
 #include <filesystem>
+#include <iostream>
+#include <utility>
+#include "Vector.hpp"
 #include "BitStream.h"
-#include "Code.h"
+#include "CodeTable.h"
 #include "Tree.h"
 #include "constants.h"
 
