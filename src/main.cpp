@@ -13,7 +13,7 @@ int main(void) {
   std::cin >> mode;
   switch (mode)
   {
-  case 'c':
+  case 'e':
     processEncode();
     break;
   case 'd':

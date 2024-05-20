@@ -1,10 +1,9 @@
 #include "BitStream.h"
 
-BitStream::BitStream(std::fstream &file, bool log) :
+BitStream::BitStream(std::fstream &file) :
   file_(file),
   data_(0),
-  pos_(0),
-  log_(log)
+  pos_(0)
 {}
 
 BitStream::~BitStream()
@@ -23,8 +22,6 @@ ErrorCode BitStream::readBit(std::int32_t &bit)
   }
 
   bit = (data_ >> --pos_) & 1;
-  if (log_)
-    std::cout << bit;
   return ErrorCode::NoError;
 }
 
@@ -36,8 +33,6 @@ void BitStream::writeBit(std::int32_t bit)
     data_ = 0;
     pos_ = 0;
   }
-  if (log_)
-    std::cout << bit;
   data_ = bit | (data_ << 1);
   ++pos_;
 }

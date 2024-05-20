@@ -10,7 +10,7 @@
 class BitStream
 {
 public:
-  BitStream(std::fstream &file, bool log=true);
+  BitStream(std::fstream &file);
   ~BitStream();
 
   ErrorCode readBit(std::int32_t &bit);
@@ -19,10 +19,10 @@ public:
   void writeByte(std::uint8_t byte);
 
   void flush();
+
 private:
   std::fstream &file_;
   std::uint8_t data_;
   int pos_;
-  bool log_;
 };
 #endif  // _BIT_STREAM_H

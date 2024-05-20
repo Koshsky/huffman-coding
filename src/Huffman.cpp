@@ -42,7 +42,7 @@ void encode(std::fstream &inputFile, std::fstream &outputFile)
   inputFile.seekg(0, std::ios_base::beg);
   outputFile.seekp(0, std::ios::beg);
 
-  BitStream stream(outputFile, false);
+  BitStream stream(outputFile);
   Vector<std::pair<char, int>> frequencies(createFrequencyTable(inputFile));
   Tree tree(frequencies);
   TreeNode *root = tree.root_;
@@ -51,12 +51,11 @@ void encode(std::fstream &inputFile, std::fstream &outputFile)
 
   int length = root->freq_;
   outputFile.write(reinterpret_cast<const char *>(&length), sizeof(int));
-  std::cout << "LENGTH:\n" << length << '\n';
 
-  std::cout << "PACK TREE:\n";
+  std::cout << "PACKING TREE\n";
   root->packTree(stream);
 
-  std::cout << "\nENCODE TEXT:\n";
+  std::cout << "ENCODING TEXT:\n";
   while (inputFile.peek() != EOF)
   {
     char c;
@@ -76,7 +75,7 @@ void decode(std::fstream &inputFile, std::fstream &outputFile)
   if (inputFile.peek() == EOF)
     return;
 
-  BitStream stream(inputFile, false);
+  BitStream stream(inputFile);
   int length;
   inputFile.read(reinterpret_cast<char *>(&length), sizeof(int));
 

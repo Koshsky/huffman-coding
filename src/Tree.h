@@ -19,7 +19,6 @@ public:
 
   bool isLeaf() const;
   void packTree(BitStream &stream);
-  void printTree(std::ostream &out) const;
 };
 
 class Tree {
@@ -29,7 +28,6 @@ public:
   ~Tree();
 
   ErrorCode unpack(BitStream &stream, char &c);
-  void printTree(std::ostream &out) const;
 
   TreeNode *root_;
 };

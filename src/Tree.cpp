@@ -39,17 +39,6 @@ void TreeNode::packTree(BitStream &stream)
   right_->packTree(stream);
 }
 
-void TreeNode::printTree(std::ostream &out) const
-{
-  out << '(';
-  if (left_)
-    left_->printTree(out);
-  out << symbol_;
-  if (right_)
-    right_->printTree(out);
-  out << ')';
-}
-
 Tree::Tree(const Vector<std::pair<char, int>> frequencies) :
   root_(nullptr)
 {
@@ -96,12 +85,6 @@ ErrorCode Tree::unpack(BitStream &stream, char &c)  // getSymbol from encodedFil
 
   c = currNode->symbol_;
   return ErrorCode::NoError;
-}
-
-void Tree::printTree(std::ostream &out) const
-{
-  root_->printTree(out);
-  out << '\n';
 }
 
 TreeNode * unpackTree(BitStream &stream)  // getTree from encodedFile

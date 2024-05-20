@@ -14,6 +14,7 @@ void CodeTable::getCodes(TreeNode *root, std::string code, int cur_len)
   getCodes(root->left_, code + "0", cur_len + 1);
   getCodes(root->right_, code + "1", cur_len + 1);
 }
+
 void CodeTable::pack(char c, BitStream &stream) const
 {
   std::string code;
