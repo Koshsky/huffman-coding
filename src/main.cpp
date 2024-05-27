@@ -4,6 +4,9 @@
 #include <iostream>
 #include <string>
 
+const char *I_M = "Invalid mode";
+const char *F_E = "Failed to open file";
+
 void processEncode();
 void processDecode();
 
@@ -20,7 +23,7 @@ int main(void) {
     processDecode();
     break;
   default:
-    std::cerr << "Invalid mode" << std::endl;
+    std::cerr << I_M << std::endl;
     return EXIT_FAILURE;
   }
 
@@ -41,7 +44,7 @@ void processEncode()
 
   if (!inputFile.is_open() || !encodedFile.is_open())
   {
-    std::cerr << "Failed to open file" << std::endl;
+    std::cerr << F_E << std::endl;
     exit(EXIT_FAILURE);
   }
 

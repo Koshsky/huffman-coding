@@ -48,14 +48,13 @@ void encode(std::fstream &inputFile, std::fstream &outputFile)
   TreeNode *root = tree.root_;
   CodeTable codes(root);
   codes.printTable(std::cout);
-
   int length = root->freq_;
   outputFile.write(reinterpret_cast<const char *>(&length), sizeof(int));
 
   std::cout << "PACKING TREE\n";
   root->packTree(stream);
 
-  std::cout << "ENCODING TEXT:\n";
+  std::cout << "ENCODING TEXT\n";
   while (inputFile.peek() != EOF)
   {
     char c;
