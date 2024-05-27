@@ -5,7 +5,7 @@
 #include <iostream>
 #include <bitset>
 #include <string>
-#include "Vector.hpp"
+#include <vector>
 #include "BitStream.h"
 #include "Tree.h"
 #include "constants.h"
@@ -19,7 +19,7 @@ public:
   void printTable(std::ostream &out) const;
 
 private:
-  Vector<std::pair<char, std::string>> codes_;
+  std::vector<std::pair<char, std::string>> codes_;
 };
 
 #endif // _CODE_H

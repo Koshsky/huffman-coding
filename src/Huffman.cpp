@@ -1,8 +1,8 @@
 #include "Huffman.h"
 
-Vector<std::pair<char, int>> createFrequencyTable(std::fstream &in)
+std::vector<std::pair<char, int>> createFrequencyTable(std::fstream &in)
 {
-  Vector<std::pair<char, int>> frequencies;
+  std::vector<std::pair<char, int>> frequencies;
 
   char c;
   while (in.peek() != EOF)
@@ -43,7 +43,7 @@ void encode(std::fstream &inputFile, std::fstream &outputFile)
   outputFile.seekp(0, std::ios::beg);
 
   BitStream stream(outputFile);
-  Vector<std::pair<char, int>> frequencies(createFrequencyTable(inputFile));
+  std::vector<std::pair<char, int>> frequencies(createFrequencyTable(inputFile));
   Tree tree(frequencies);
   TreeNode *root = tree.root_;
   CodeTable codes(root);

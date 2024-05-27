@@ -6,7 +6,7 @@
 #include <filesystem>
 #include <iostream>
 #include <utility>
-#include "Vector.hpp"
+#include <vector>
 #include "BitStream.h"
 #include "CodeTable.h"
 #include "Tree.h"

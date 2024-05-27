@@ -5,7 +5,7 @@
 #include <iostream>
 #include "constants.h"
 #include "BitStream.h"
-#include "Queue.hpp"
+#include <queue>
 
 class TreeNode {
 public:
@@ -23,7 +23,7 @@ public:
 
 class Tree {
 public:
-  Tree(const Vector<std::pair<char, int>> frequencies);
+  Tree(const std::vector<std::pair<char, int>> frequencies);
   Tree(TreeNode *root);
   ~Tree();
 

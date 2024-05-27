@@ -1,5 +1,4 @@
 #include "Tree.h"
-#include <iostream>
 
 TreeNode::TreeNode(char symbol, int freq, TreeNode *left, TreeNode *right)
   : symbol_(symbol), freq_(freq), left_(left), right_(right) {}
@@ -39,11 +38,11 @@ void TreeNode::packTree(BitStream &stream)
   right_->packTree(stream);
 }
 
-Tree::Tree(const Vector<std::pair<char, int>> frequencies) :
+Tree::Tree(const std::vector<std::pair<char, int>> frequencies) :
   root_(nullptr)
 {
 
-  PriorityQueue<TreeNode *, TreeNodeComparator> queue;
+  std::priority_queue<TreeNode *, std::vector<TreeNode *>, TreeNodeComparator> queue;
   for (std::size_t i = 0; i < frequencies.size(); i++)
   {
     TreeNode *node = new TreeNode(frequencies[i].first, frequencies[i].second, nullptr, nullptr);
